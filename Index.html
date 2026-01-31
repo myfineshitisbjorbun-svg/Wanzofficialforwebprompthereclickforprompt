@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WanzX Prompt</title>
+
+<style>
+:root{
+  --bg:#1b1b1b;
+  --card:#232323;
+  --text:#eaeaea;
+  --muted:#9a9a9a;
+  --accent:#ffffff;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:Arial Black, Arial, Helvetica, sans-serif;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ================= BACKGROUND ================= */
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.ball{
+  position:absolute;
+  bottom:-200px;
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  background:radial-gradient(circle,#cfcfcf,#7a7a7a);
+  opacity:.18;
+  animation:float 20s linear infinite;
+}
+
+.ball:nth-child(1){left:15%;animation-delay:0s;}
+.ball:nth-child(2){left:45%;animation-delay:7s;}
+.ball:nth-child(3){left:75%;animation-delay:14s;}
+
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(-140vh);}
+}
+
+/* ================= MENU ================= */
+.menu-btn{
+  position:fixed;
+  top:18px;
+  left:18px;
+  z-index:10;
+  font-size:26px;
+  cursor:pointer;
+  user-select:none;
+}
+
+.menu{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(6px);
+  display:none;
+  z-index:9;
+}
+
+.menu.show{display:block;}
+
+.menu-content{
+  width:260px;
+  height:100%;
+  background:#1f1f1f;
+  padding:30px 22px;
+}
+
+.menu a{
+  display:block;
+  margin:16px 0;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.menu small{
+  position:absolute;
+  bottom:20px;
+  left:22px;
+  color:#777;
+  font-weight:400;
+}
+
+/* ================= HEADER ================= */
+header{
+  position:relative;
+  z-index:5;
+  padding:50px 20px 10px;
+  text-align:center;
+}
+
+.logo{
+  width:190px;
+  margin:auto;
+  filter:
+    drop-shadow(0 0 20px rgba(255,255,255,.6))
+    drop-shadow(0 0 40px rgba(255,255,255,.35));
+}
+
+h1{
+  margin:18px 0 6px;
+  font-size:34px;
+  letter-spacing:.6px;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:2px;
+}
+
+/* ================= SEARCH ================= */
+.search-box{
+  margin:34px auto 10px;
+  max-width:420px;
+}
+
+.search-box input{
+  width:100%;
+  padding:14px 18px;
+  border-radius:14px;
+  border:none;
+  background:#2a2a2a;
+  color:#fff;
+  font-size:15px;
+  outline:none;
+}
+
+/* ================= CONTENT ================= */
+.container{
+  position:relative;
+  z-index:5;
+  max-width:900px;
+  margin:auto;
+  padding:30px 20px 10px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+  opacity:0;
+  transform:translateY(45px);
+  transition:.6s ease;
+}
+
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.card img{
+  width:46px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  margin:10px 0 14px;
+  font-size:15px;
+}
+
+.card a{
+  display:inline-block;
+  padding:10px 22px;
+  border-radius:12px;
+  background:#fff;
+  color:#000;
+  text-decoration:none;
+  font-weight:800;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  color:#777;
+  padding:40px 10px;
+  font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg">
+  <div class="ball"></div>
+  <div class="ball"></div>
+  <div class="ball"></div>
+</div>
+
+<!-- MENU -->
+<div class="menu-btn" onclick="openMenu()">☰</div>
+
+<div class="menu" id="menu" onclick="outsideClose(event)">
+  <div class="menu-content">
+    <a href="https://wa.me/6285966198748">Contact Wanz</a>
+    <a href="#" onclick="goHome()">All Prompt</a>
+    <a href="#" onclick="goSearch()">Search</a>
+    <small>© hak cipta xy chan community 2026</small>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="top">
+  <img class="logo" src="https://i.postimg.cc/x8WPyYT0/Background-Eraser-20260128-173856882.png">
+  <h1>WanzX Prompt</h1>
+  <div class="subtitle">JAILBREAK PROMPT REPOSITORY</div>
+
+  <div class="search-box">
+    <input id="searchInput" type="text" placeholder="Search files...">
+  </div>
+</header>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="grid" id="promptList">
+
+    <!-- PROMPT -->
+    <div class="card">
+      <img src="https://i.postimg.cc/CxTVmYkJ/Background-Eraser-20260128-202213541.png">
+      <h3>Jailbreak iOS Guide</h3>
+      <a href="files/prompt1.zip">GET FILE</a>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/CxTVmYkJ/Background-Eraser-20260128-202213541.png">
+      <h3>ChatGPT Dev Prompt</h3>
+      <a href="files/prompt2.zip">GET FILE</a>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/CxTVmYkJ/Background-Eraser-20260128-202213541.png">
+      <h3>Roleplay Bypass</h3>
+      <a href="files/prompt3.zip">GET FILE</a>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/CxTVmYkJ/Background-Eraser-20260128-202213541.png">
+      <h3>System Override</h3>
+      <a href="files/prompt4.zip">GET FILE</a>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/CxTVmYkJ/Background-Eraser-20260128-202213541.png">
+      <h3>Advanced Jailbreak</h3>
+      <a href="files/prompt5.zip">GET FILE</a>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/CxTVmYkJ/Background-Eraser-20260128-202213541.png">
+      <h3>Ultimate Prompt</h3>
+      <a href="files/prompt6.zip">GET FILE</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+© hak cipta xy chan community 2026
+</footer>
+
+<script>
+/* ================= MENU ================= */
+const menu=document.getElementById("menu");
+
+function openMenu(){
+  menu.classList.add("show");
+}
+
+function outsideClose(e){
+  if(e.target===menu){
+    menu.classList.remove("show");
+  }
+}
+
+function closeMenu(){
+  menu.classList.remove("show");
+}
+
+/* ================= NAV ================= */
+function goHome(){
+  closeMenu();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function goSearch(){
+  closeMenu();
+  window.scrollTo({top:0,behavior:"smooth"});
+  setTimeout(()=>{
+    document.getElementById("searchInput").focus();
+  },350);
+}
+
+/* ================= SEARCH ================= */
+const input=document.getElementById("searchInput");
+const cards=document.querySelectorAll(".card");
+
+input.addEventListener("input",()=>{
+  const v=input.value.toLowerCase();
+  cards.forEach(c=>{
+    c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
+  });
+});
+
+/* ================= SCROLL ANIMATION ================= */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+},{threshold:.2});
+
+cards.forEach(c=>observer.observe(c));
+</script>
+
+</body>
+  </html>
